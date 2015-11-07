@@ -15,6 +15,8 @@
             android:id="@+id/card_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:adjustViewBounds="true"
             />
 
         <TextView
@@ -24,6 +26,7 @@
             android:background="@color/cardview_name_background_color"
             android:textColor="@color/cardview_name_text_color"
             android:textAppearance="?android:textAppearanceSmall"
+            android:layout_alignParentBottom="true"
         />
 
     </RelativeLayout>
