@@ -1,5 +1,6 @@
 package com.tile.janv.recyclerview;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -16,8 +18,6 @@ public class MainActivityFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
-
 
     public MainActivityFragment() {
     }
@@ -42,10 +42,20 @@ public class MainActivityFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter (see also next example)
+        // specify an adapter
         mAdapter = new MainAdapter(CharacterData.getCharacters());
         mRecyclerView.setAdapter(mAdapter);
 
-
+        /**
+         * @see http://stackoverflow.com/questions/24471109/recyclerview-onclick/26196831#26196831
+         */
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.RecyclerElementOnClickCallback() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(getContext(), CharacterDetailsActivity.class);
+                intent.putExtra(Constants.CHARACTER_POSITION, position);
+                startActivity(intent);
+            }
+        }));
     }
 }

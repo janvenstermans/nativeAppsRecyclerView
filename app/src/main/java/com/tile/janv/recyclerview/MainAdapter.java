@@ -1,16 +1,16 @@
 package com.tile.janv.recyclerview;
 
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
+public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder>  {
 
     // A good online example
     // https://www.binpress.com/tutorial/android-l-recyclerview-and-cardview-tutorial/156
@@ -20,11 +20,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
+    //
+    // clicklistener, see http://stackoverflow.com/questions/24885223/why-doesnt-recyclerview-have-onitemclicklistener-and-how-recyclerview-is-dif
     public static class MainViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public ImageView vImage;
         public TextView vName;
-        public TextView vDescription;
+        public int position;
 
         public MainViewHolder(View v) {
             super(v);
@@ -40,7 +42,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MainAdapter.MainViewHolder onCreateViewHolder(ViewGroup parent,
+    public MainAdapter.MainViewHolder onCreateViewHolder(final ViewGroup parent,
                                                    int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
@@ -54,6 +56,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         CharacterDescription description = mDataList.get(position);
         holder.vImage.setImageResource(description.id);
         holder.vName.setText(description.name);
+        holder.position = position;
     }
 
     // Return the size of your dataset (invoked by the layout manager)

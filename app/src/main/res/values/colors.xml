@@ -2,4 +2,5 @@
 <resources>
     <color name="cardview_name_text_color">#FFFAFAFA</color>
     <color name="cardview_name_background_color">#37000000</color>
+    <color name="character_details_popup_background">#16000000</color>
 </resources>
